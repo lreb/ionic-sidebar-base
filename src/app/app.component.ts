@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -23,7 +23,8 @@ export class MyApp {
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    public events: Events) {
     this.initializeApp();
   }
 
@@ -33,6 +34,10 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      // events
+      this.events.subscribe('user:login', (userInfo) => {
+        this.login();
+      });
     });
   }
 
@@ -75,4 +80,8 @@ export class MyApp {
     this.rootPage = HomePage;
     this.menuCtrl.enable(true);
   }
+  /** login in app */
+  login(){
+    this.nav.setRoot(HomePage)
+  } 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, Events } from 'ionic-angular';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the SignInPage page.
  *
@@ -14,11 +14,17 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SignInPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+  	public navParams: NavParams,
+  	public events: Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInPage');
   }
-
+  /** login in app */
+  login(){
+  	console.log('sigin login');
+  	this.events.publish('user:login', {mail:'holo', password: '123456'});
+  } 
 }
