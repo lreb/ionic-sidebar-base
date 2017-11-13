@@ -5,15 +5,28 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { WelcomePage } from '../pages/welcome/welcome';
+import { SignInPage } from '../pages/sign-in/sign-in';
+import { SignUpPage } from '../pages/sign-up/sign-up';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+const PAGES_IMPORTED = [
+  MyApp,
+  HomePage,
+  WelcomePage,
+  SignInPage,
+  SignUpPage
+];
+
+const MODELS_IMPORTED = [
+];
+
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    ListPage
+    PAGES_IMPORTED
   ],
   imports: [
     BrowserModule,
@@ -21,9 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage
+    PAGES_IMPORTED
   ],
   providers: [
     StatusBar,

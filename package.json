@@ -1,8 +1,8 @@
 {
   "name": "base-ionic3",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Luis Espinoza",
+  "homepage": "https://facware.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -34,5 +34,5 @@
     "@ionic/app-scripts": "3.1.0",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project"
+  "description": "this is a base for ionic project, the goal is to have a fast project starter"
 }
