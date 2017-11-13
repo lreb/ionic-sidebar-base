@@ -25,6 +25,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public events: Events) {
+    this.buildMenu();
     this.initializeApp();
   }
 
