@@ -15,6 +15,9 @@ A short description of the motivation behind the creation and maintenance of the
 Provide code examples and explanations of how to get the project.
 
 npm install angular2-jwt
+### Google-plus
+ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=
+npm install --save @ionic-native/google-plus
 
 ## API Reference
 
