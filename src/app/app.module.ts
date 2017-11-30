@@ -8,7 +8,6 @@ import { ListPage } from '../pages/list/list';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
-import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,8 +17,7 @@ const PAGES_IMPORTED = [
   HomePage,
   WelcomePage,
   SignInPage,
-  SignUpPage,
-  SettingsPage
+  SignUpPage
 ];
 
 const MODELS_IMPORTED = [
