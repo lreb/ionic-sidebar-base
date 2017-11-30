@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "912297928321",
+    "project_id": "facware-ionic3-base"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912297928321:android:8e2141bc6b2e1cbd",
+        "android_client_info": {
+          "package_name": "facware.base.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912297928321-hlj57g8qaff67ora85c40qvtsepr22al.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "912297928321-6kiv6an3enu98pq5cmi63h4m1qsm6p1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "facware.base.com",
+            "certificate_hash": "2f008d2eaa511d1741cedbd9ed3086590a8a09e2"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhDvFld8uY0HddKN_oOLLZ6VNR-wWxyGU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
