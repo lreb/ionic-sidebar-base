@@ -23,6 +23,12 @@ Depending on the size of the project, if it is small and simple enough the refer
 ## Tests
 
 Describe and show how to run the tests with code examples.
+## Plus
+
+# regitesr andoid app to authenticate with google
+https://developers.google.com/mobile/add?platform=android&cntapi=signin
+# regitesr ios app to authenticate with google
+https://developers.google.com/mobile/add?platform=ios&cntapi=signin
 
 # Sign a app
 # generate keystore
