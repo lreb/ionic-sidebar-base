@@ -23,22 +23,23 @@ Depending on the size of the project, if it is small and simple enough the refer
 ## Tests
 
 Describe and show how to run the tests with code examples.
-## Plus
 
-# regitesr andoid app to authenticate with google
+# Plus
+
+## register andoid app to authenticate with google
 https://developers.google.com/mobile/add?platform=android&cntapi=signin
-# regitesr ios app to authenticate with google
+## regitesr ios app to authenticate with google
 https://developers.google.com/mobile/add?platform=ios&cntapi=signin
 
-# Sign a app
-# generate keystore
+## Sign a app
+### generate keystore
 keytool -genkey -v -keystore my-key.keystore -alias myalias -keyalg RSA -keysize 2048 -validity 20000
-# generate SHA-1 fingerprint
+### generate SHA-1 fingerprint
 keytool -exportcert -list -v \
 -alias myalias -keystore my-key.keystore
-# sign the unsigned APK
+### sign the unsigned APK
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore HelloWorld-release-unsigned.apk alias_name
-# zip align tool to optimize the APK
+### zip align tool to optimize the APK
 zipalign -v 4 HelloWorld-release-unsigned.apk HelloWorld.apk
 
 ## Contributors
@@ -49,4 +50,3 @@ Let people know how they can dive into the project, include important links to t
 
 A short snippet describing the license (MIT, Apache, etc.)
 
-#
