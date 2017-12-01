@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController, Events } from 'ionic-angular';
+import { Nav, Platform, MenuController, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -24,13 +24,15 @@ export class MyApp {
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
-    public events: Events) {
+    public events: Events,
+    public alertCtrl: AlertController) {
     this.buildMenu();
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.verifySession();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -38,6 +40,9 @@ export class MyApp {
       // events
       this.events.subscribe('user:login', (userInfo) => {
         this.login();
+      });
+      this.events.subscribe('user:register', (userInfo) => {
+        this.signup();
       });
     });
   }
@@ -51,16 +56,17 @@ export class MyApp {
   verifySession() {
     if (localStorage.getItem('userData') !== null) {
       if (!this.jwtHelper.isTokenExpired(JSON.parse(localStorage.getItem('userData')).auth_token)) {
-        this.authenticatedMenu();
+        console.log('with localStorage auth_token');
+        this.menuWithSession();
       }
       else {
-        //console.log('without localStorage');
-        this.unauthenticatedMenu();
+        console.log('without localStorage auth_token');
+        this.menuWithoutSession();
       }
     }
     else {
-      //console.log('without localStorage');
-      this.unauthenticatedMenu();
+      console.log('without localStorage userData');
+      this.menuWithoutSession();
     }
   }
   /** create side menu content*/
@@ -70,19 +76,52 @@ export class MyApp {
     ];
   }
   /** when user doesn't has session*/
-  unauthenticatedMenu() {
+  menuWithoutSession() {
     //console.log('unauthenticatedMenu');
     this.rootPage = WelcomePage;
-    this.menuCtrl.enable(false);
+    this.menuCtrl.enable(false,'leftMenu');
   }
   /** when user  has session*/
-  authenticatedMenu() {
+  menuWithSession() {
     //console.log('authenticatedMenu');
     this.rootPage = HomePage;
-    this.menuCtrl.enable(true);
+    this.menuCtrl.enable(true,'leftMenu');
   }
   /** login in app */
   login(){
-    this.nav.setRoot(HomePage)
+    this.nav.setRoot(HomePage);
+    this.menuWithSession();
   } 
+  /** Ask before to logout */
+  exitApp(){
+    let confirm = this.alertCtrl.create({
+      title: 'End session?',
+      message: 'Are you sure to finish session',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            console.log('Agree clicked');
+            this.logout();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+  /** logout */
+  logout(){
+    this.nav.setRoot(WelcomePage);
+    this.menuWithoutSession();
+  }
+  /** Register new user */
+  signup(){
+    this.login();
+  }
 }

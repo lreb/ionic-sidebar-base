@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, Events } from 'ionic-angular';
 /**
  * Generated class for the SignUpPage page.
  *
@@ -14,11 +13,18 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SignUpPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+  	public navParams: NavParams, 
+  	public events: Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
+  }
+
+  register(){
+  	console.log('user register');
+  	this.events.publish('user:register', {mail:'holo', password: '123456', confirm_password: '123456'});
   }
 
 }
