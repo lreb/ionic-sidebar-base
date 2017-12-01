@@ -29,12 +29,19 @@ export class WelcomePage {
   	this.navCtrl.push(SignUpPage);
   }
   google(){
+    var gKey = '1010364927244-amo74h32kdjjmm7dtj5lri3nqihhja0r.apps.googleusercontent.com';
     this.googlePlus.login({
-          'webClientId': '780469554734-rpkej3o37on3p5maksp9klqjvj5hg0k7.apps.googleusercontent.com'
+          'scopes':'', //// optional, space-separated list of scopes, If not included or empty, defaults to 'profile' and 'email'
+          'webClientId': gKey, // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+          'offline': true
         }).then((res) => {
-            console.log(res);
+          alert(res);
+            console.log(gKey);
+            console.log(JSON.stringify(res));
         }, (err) => {
-            console.log(err);
+          alert(err);
+          console.log(gKey);
+            console.log(JSON.stringify(err));
         });
   }
   facebook(){

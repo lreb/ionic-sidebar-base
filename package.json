@@ -28,7 +28,6 @@
     "angular2-jwt": "^0.2.3",
     "browse": "0.4.0",
     "cordova-android": "6.3.0",
-    "cordova-browser": "5.0.1",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-googleplus": "^5.1.1",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -54,12 +53,11 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "912297928321-hlj57g8qaff67ora85c40qvtsepr22al.apps.googleusercontent.com"
+        "REVERSED_CLIENT_ID": "1010364927244-amo74h32kdjjmm7dtj5lri3nqihhja0r.apps.googleusercontent.com"
       }
     },
     "platforms": [
-      "android",
-      "browser"
+      "android"
     ]
   }
 }
