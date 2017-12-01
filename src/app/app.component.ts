@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { WelcomePage } from '../pages/welcome/welcome';
 
 import {JwtHelper} from 'angular2-jwt';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,12 +21,22 @@ export class MyApp {
 
   jwtHelper: JwtHelper = new JwtHelper();
 
+  email: any;
+  authToekn: any;
+  serverCode: any;
+  userId: any;
+  displayName: any;
+  familyName: any;
+  givenName: any;
+  imageUrl: any;
+
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController,
     public events: Events,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private googlePlus: GooglePlus) {
     this.buildMenu();
     this.initializeApp();
   }
@@ -43,6 +54,12 @@ export class MyApp {
       });
       this.events.subscribe('user:register', (userInfo) => {
         this.signup();
+      });
+      this.events.subscribe('user:google', (userInfo) => {
+        this.googleSession();
+      });
+      this.events.subscribe('user:facebook', (userInfo) => {
+        this.facebookSession();
       });
     });
   }
@@ -92,6 +109,39 @@ export class MyApp {
     this.nav.setRoot(HomePage);
     this.menuWithSession();
   } 
+  /** Google */
+  googleSession(){
+    // https://www.djamware.com/post/59094a2280aca7414e78a63d/ionic-3-google-plus-authentication-tutorial
+    // https://javebratt.com/ionic-google-login/
+    var gKey = '1010364927244-amo74h32kdjjmm7dtj5lri3nqihhja0r.apps.googleusercontent.com';
+    this.googlePlus.login({
+      'scopes':'', //// optional, space-separated list of scopes, If not included or empty, defaults to 'profile' and 'email'
+      'webClientId': gKey, // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'offline': true
+    }).then((res) => {
+      console.log(gKey);
+      alert(JSON.stringify(res));
+      console.log(JSON.stringify(res));
+      console.log('email: ' + res.email);
+      console.log('idToken: ' + res.idToken);
+      console.log('serverAuthCode: ' + res.serverAuthCode);
+      console.log('userId: ' + res.userId);
+      console.log('displayName: ' + res.displayName);
+      console.log('familyName: ' + res.familyName);
+      console.log('givenName: ' + res.givenName);
+      console.log('imageUrl: ' + res.imageUrl);
+
+      this.login();
+    }, (err) => {
+      alert(err);
+      console.log(gKey);
+        console.log(JSON.stringify(err));
+    });
+  }
+  /** Facebook */
+  facebookSession(){
+    // https://www.djamware.com/post/59ad3a0c80aca768e4d2b135/login-with-ionic-3-and-cordova-native-facebook-connect-plugin
+  }
   /** Ask before to logout */
   exitApp(){
     let confirm = this.alertCtrl.create({
@@ -117,6 +167,12 @@ export class MyApp {
   }
   /** logout */
   logout(){
+    // logout google
+    if (this.platform.is('cordova')) {
+        this.googlePlus.logout().then(() => {
+          console.log("logged out");
+      });
+    }
     this.nav.setRoot(WelcomePage);
     this.menuWithoutSession();
   }
