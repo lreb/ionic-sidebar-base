@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { HelpPage } from '../pages/help/help';
+import { SettingsPage } from '../pages/settings/settings';
+import { MyAccountPage } from '../pages/my-account/my-account';
 
 import {JwtHelper} from 'angular2-jwt';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -89,7 +92,10 @@ export class MyApp {
   /** create side menu content*/
   buildMenu() {
     this.pages = [
-      { icon: 'md-apps', title: 'Home', component: HomePage }
+      { icon: 'md-home', title: 'Home', component: HomePage },
+      { icon: 'md-person', title: 'My Account', component: MyAccountPage },
+      { icon: 'md-settings', title: 'Settings', component: SettingsPage },
+      { icon: 'md-help-circle', title: 'Help', component: HelpPage }
     ];
   }
   /** when user doesn't has session*/
