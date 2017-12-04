@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
    <form [formGroup]="form">
     <ion-item>
@@ -31,5 +30,4 @@
 	</ion-item>
 	<button ion-button full (click)="register()" [disabled]="!form.valid">Sign up</button>
    </form>
-   {{form}}
 </ion-content>
