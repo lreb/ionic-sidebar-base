@@ -11,6 +11,7 @@ import { MyAccountPage } from '../pages/my-account/my-account';
 
 import {JwtHelper} from 'angular2-jwt';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,11 +20,11 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = WelcomePage;
-
+  // menu
   pages: Array<{icon: string, title: string, component: any}>;
-
+  // jwt
   jwtHelper: JwtHelper = new JwtHelper();
-
+  // user
   email: any;
   authToekn: any;
   serverCode: any;
@@ -32,6 +33,9 @@ export class MyApp {
   familyName: any;
   givenName: any;
   imageUrl: any;
+  // facebook
+  isLoggedIn:boolean = false;
+  users: any;
 
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
@@ -39,7 +43,19 @@ export class MyApp {
     public menuCtrl: MenuController,
     public events: Events,
     public alertCtrl: AlertController,
-    private googlePlus: GooglePlus) {
+    private googlePlus: GooglePlus,
+    private facebook:Facebook) {
+    // verify facebook connection status
+    this.facebook.getLoginStatus()
+    .then(res => {
+      console.log(res.status);
+      if(res.status === "connect") {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    })
+    .catch(e => console.log(e));
     this.buildMenu();
     this.initializeApp();
   }
@@ -147,7 +163,28 @@ export class MyApp {
   /** Facebook */
   facebookSession(){
     // https://www.djamware.com/post/59ad3a0c80aca768e4d2b135/login-with-ionic-3-and-cordova-native-facebook-connect-plugin
+    this.facebook.login(['public_profile', 'user_friends', 'email'])
+    .then(res => {
+      if(res.status === "connected") {
+        this.isLoggedIn = true;
+        this.getUserDetail(res.authResponse.userID);
+      } else {
+        this.isLoggedIn = false;
+      }
+    })
+    .catch(e => console.log('Error logging into Facebook', e));
   }
+  // facebook get user details
+  getUserDetail(userid) {
+  this.facebook.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+    .then(res => {
+      console.log(res);
+      this.users = res;
+    })
+    .catch(e => {
+      console.log(e);
+    });
+}
   /** Ask before to logout */
   exitApp(){
     let confirm = this.alertCtrl.create({

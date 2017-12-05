@@ -22,6 +22,13 @@ npm install --save @ionic-native/google-plus
 
 In some places say that you must use a Android type clinet id, but for me worked with Application web (ionic). I need research more...
 
+### Facebook
+[iOS Setup](https://developers.facebook.com/docs/ios/app-events)
+[Android Setup](https://developers.facebook.com/docs/android/app-events)
+
+ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
+npm install --save @ionic-native/facebook
+
 ## API Reference
 
 Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.

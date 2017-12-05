@@ -86,4 +86,8 @@
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
         <variable name="REVERSED_CLIENT_ID" value="1010364927244-amo74h32kdjjmm7dtj5lri3nqihhja0r.apps.googleusercontent.com" />
     </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="159230037970014" />
+        <variable name="APP_NAME" value="Facware" />
+    </plugin>
 </widget>
