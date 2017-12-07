@@ -29,6 +29,8 @@ In some places say that you must use a Android type clinet id, but for me worked
 ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
 npm install --save @ionic-native/facebook
 
+[Reference](https://ionicacademy.com/ionic-facebook-login/)
+
 ## API Reference
 
 Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
@@ -57,6 +59,12 @@ keytool -exportcert -list -v \
 #### MAC/LINUX
 keytool -exportcert -list -v \
 -alias androiddebugkey -keystore ~/.android/debug.keystore
+
+### generate key hash
+#### WINDOWS
+keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | openssl sha1 -binary | openssl base64 
+#### MAC/LINUX
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
 
 The keytool utility prompts you to enter a password for the keystore. The default password for the debug keystore is android. The keytool then prints the fingerprint to the terminal. For example: Certificate fingerprint: SHA1: DA:39:A3:EE:5E:6B:4B:0D:32:55:BF:EF:95:60:18:90:AF:D8:07:09
 [IReference](https://developers.google.com/android/guides/client-auth)

@@ -163,6 +163,7 @@ export class MyApp {
   /** Facebook */
   facebookSession(){
     // https://www.djamware.com/post/59ad3a0c80aca768e4d2b135/login-with-ionic-3-and-cordova-native-facebook-connect-plugin
+    // https://ionicthemes.com/tutorials/about/ionic2-facebook-login
     this.facebook.login(['public_profile', 'user_friends', 'email'])
     .then(res => {
       if(res.status === "connected") {
@@ -176,15 +177,23 @@ export class MyApp {
   }
   // facebook get user details
   getUserDetail(userid) {
-  this.facebook.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+  this.facebook.api("/"+userid+"/?fields=id,name,email,picture,gender,first_name,last_name",["public_profile"])
     .then(res => {
-      console.log(res);
+      console.log(JSON.stringify(res));
       this.users = res;
+      console.log('email: ' + res.email);
+      console.log('id: ' + res.id);
+      //console.log('serverAuthCode: ' + res.serverAuthCode);
+      console.log('gender: ' + res.gender);
+      console.log('name: ' + res.name);
+      console.log('first_name: ' + res.first_name);
+      console.log('last_name: ' + res.last_name);
+      console.log('picture: ' + res.picture);
     })
     .catch(e => {
-      console.log(e);
+      console.log(JSON.stringify(e));
     });
-}
+  }
   /** Ask before to logout */
   exitApp(){
     let confirm = this.alertCtrl.create({
@@ -210,12 +219,24 @@ export class MyApp {
   }
   /** logout */
   logout(){
-    // logout google
+    
     if (this.platform.is('cordova')) {
+        // logout google
         this.googlePlus.logout().then(() => {
-          console.log("logged out");
-      });
+          console.log("logged out Google");
+        });
+        // Logout Facebook
+        if(this.isLoggedIn == true){
+          this.facebook.logout().then(res => { 
+            this.isLoggedIn = false
+            console.log("logged out Facebook");
+          }).catch(e => {
+            console.log('Error logout from Facebook', e)
+          });
+        }
+        
     }
+    
     this.nav.setRoot(WelcomePage);
     this.menuWithoutSession();
   }
